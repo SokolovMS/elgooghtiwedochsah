@@ -1,5 +1,6 @@
 package com.eight.zero.three;
 
+import com.eight.zero.three.input.Coord;
 import com.eight.zero.three.input.Input;
 import com.eight.zero.three.output.Output;
 
@@ -19,4 +20,9 @@ public class Algorithm {
     public static int getDistance(final int startRow, final int startCol, final int finRow, final int finCol) {
         return Math.abs(startRow - finRow) + Math.abs(startCol - finCol);
     }
+
+    public static int getDistance(final Coord a, final Coord b) {
+        return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());
+    }
+
 }
