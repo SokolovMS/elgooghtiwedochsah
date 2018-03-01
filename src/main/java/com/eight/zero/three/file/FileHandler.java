@@ -44,7 +44,7 @@ public class FileHandler {
                 String[] rideSplit = sCurrentLine.split(" ");
 
                 Ride currentRide = new Ride(
-                        id, Integer.parseInt(rideSplit[0]),
+                        i, Integer.parseInt(rideSplit[0]),
                         Integer.parseInt(rideSplit[1]),
                         Integer.parseInt(rideSplit[2]),
                         Integer.parseInt(rideSplit[3]),

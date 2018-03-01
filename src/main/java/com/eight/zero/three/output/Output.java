@@ -1,23 +1,25 @@
 package com.eight.zero.three.output;
 
+import com.eight.zero.three.input.Ride;
+import com.eight.zero.three.input.Vehicle;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Output {
     private List<Integer> [] schedule;
 
-    public Output(int vehicleQnt) {
-        schedule = new List[vehicleQnt];
-    }
+    public Output(final List<Vehicle> vehicles) {
+        schedule = new List[vehicles.size()];
 
-    public void addRides(int vehicle, int... rides) {
-        if (schedule[vehicle] == null) {
-            schedule[vehicle] = new ArrayList<>();
-        }
+        for (int i = 0; i < vehicles.size(); i++) {
+            if (schedule[i] == null) {
+                schedule[i] = new ArrayList<>();
+            }
 
-        for (int ride : rides) {
-            schedule[vehicle].add(ride);
+            for (Ride ride : vehicles.get(i).getRides()) {
+                schedule[i].add(ride.getId());
+            }
         }
     }
 
