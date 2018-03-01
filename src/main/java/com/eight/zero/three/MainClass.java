@@ -3,7 +3,6 @@ package com.eight.zero.three;
 public class MainClass {
 
     public static void main(String[] args) {
-        long start = System.currentTimeMillis();
         System.out.println("1");
         MainHandler.run("a_example.in");
         System.out.println("2");
