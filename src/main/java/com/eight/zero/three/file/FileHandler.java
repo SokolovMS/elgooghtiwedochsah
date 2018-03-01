@@ -13,47 +13,51 @@ public class FileHandler {
 
     public static final String IN_FOLDER = "src/main/resources/";
     public static final String OUT_FOLDER = "target/";
+    public static final int RIDES_PARAMS_NUMBER = 6;
 
     public static Input read(final String fileName) {
         final String path = IN_FOLDER + fileName;
 
-        BufferedReader br = null;
-        FileReader fr = null;
+        BufferedReader bufferedReader = null;
+        FileReader fileReader = null;
 
-        int r, c, l, h;
-        char [][] arr;
+        int r, c, f, n, b, t;
+        int [][] rides;
 
         try {
-            fr = new FileReader(path);
-            br = new BufferedReader(fr);
+            fileReader = new FileReader(path);
+            bufferedReader = new BufferedReader(fileReader);
 
-            String sCurrentLine = br.readLine();
+            String sCurrentLine = bufferedReader.readLine();
             String[] split = sCurrentLine.split(" ");
             r = Integer.parseInt(split[0]);
             c = Integer.parseInt(split[1]);
-            l = Integer.parseInt(split[2]);
-            h = Integer.parseInt(split[3]);
+            f = Integer.parseInt(split[2]);
+            n = Integer.parseInt(split[3]);
+            b = Integer.parseInt(split[4]);
+            t = Integer.parseInt(split[5]);
 
-            arr = new char[r][c];
+            rides = new int[n][RIDES_PARAMS_NUMBER];
 
-            for (int i = 0; i < r; i++) {
-                sCurrentLine = br.readLine();
+            for (int i = 0; i < n; i++) {
+                sCurrentLine = bufferedReader.readLine();
+                String[] rideSplit = sCurrentLine.split(" ");
 
-                for (int j = 0; j < c; j++) {
-                    arr[i][j] = sCurrentLine.charAt(j);
+                for (int j = 0; j < RIDES_PARAMS_NUMBER; j++) {
+                    rides[i][j] = Integer.parseInt(rideSplit[j]);
                 }
             }
 
-            return new Input(r, c, l, h, arr);
+            return new Input(r, c, f, n, b, t, rides);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         } finally {
             try {
-                if (br != null)
-                    br.close();
-                if (fr != null)
-                    fr.close();
+                if (bufferedReader != null)
+                    bufferedReader.close();
+                if (fileReader != null)
+                    fileReader.close();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
