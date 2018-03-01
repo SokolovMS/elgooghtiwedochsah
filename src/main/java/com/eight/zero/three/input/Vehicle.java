@@ -48,7 +48,7 @@ public class Vehicle {
     public boolean canBeAssign(Ride ride) {
         int rideDistance = getDistance(ride.getSrc(), ride.getDst());
         int vehicleToRideDst = getDistance(prevFinish, ride.getSrc());
-        int finishStep = ride.getFinishInterval().gettMax();
+        int finishStep = ride.getFinishInterval().getMax();
 
         int distance = rideDistance + vehicleToRideDst;
 
