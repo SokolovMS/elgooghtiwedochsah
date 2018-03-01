@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Vehicle {
     private final Integer number;
     private final List<Ride> rides;
-    Coord prevFinish = new Coord(0,0);
+    private Coord prevFinish = new Coord(0,0);
     private int busySteps = 0;
 
     public Vehicle(Integer number) {
@@ -33,12 +33,28 @@ public class Vehicle {
         return rides;
     }
 
+    public Coord getPrevFinish() {
+        return prevFinish;
+    }
+
     public int getBusySteps() {
         return busySteps;
     }
 
     public boolean isBusy(final int curStep) {
         return busySteps > curStep;
+    }
+
+    public boolean canBeAssign(Ride ride) {
+        int rideDistance = getDistance(ride.getSrc(), ride.getDst());
+        int vehicleToRideDst = getDistance(prevFinish, ride.getSrc());
+        int finishStep = ride.getFinishInterval().gettMax();
+
+
+
+
+
+        return true;
     }
 
     @Override
