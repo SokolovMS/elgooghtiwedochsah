@@ -1,6 +1,7 @@
 package com.eight.zero.three.input;
 
-import com.eight.zero.three.Algorithm;
+import com.eight.zero.three.algorithm.Algorithm;
+import com.eight.zero.three.algorithm.Utils;
 
 public class Ride {
     private final Coord src;
@@ -14,7 +15,7 @@ public class Ride {
                 final int s, final int f) {
         this.src = new Coord(a, b);
         this.dst = new Coord(x, y);
-        this.score = Algorithm.getDistance(src, dst);
+        this.score = Utils.getDistance(src, dst);
         this.startInterval = new TimeInterval(s, f - score);
         this.finishInterval = new TimeInterval(s + score, f);
     }
