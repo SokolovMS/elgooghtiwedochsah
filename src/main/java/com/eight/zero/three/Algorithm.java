@@ -15,4 +15,8 @@ public class Algorithm {
                 new Slice(0, 2, 3, 4)
         );
     }
+
+    public static int getDistance(final int startRow, final int startCol, final int finRow, final int finCol) {
+        return Math.abs(startRow - finRow) + Math.abs(startCol - finCol);
+    }
 }
