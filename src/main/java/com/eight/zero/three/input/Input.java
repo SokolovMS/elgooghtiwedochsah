@@ -1,46 +1,46 @@
 package com.eight.zero.three.input;
 
 public class Input {
-    private final int r;
-    private final int c;
-    private final int f;
-    private final int n;
-    private final int b;
-    private final int t;
+    private final int Rows;
+    private final int Cols;
+    private final int FVehicles;
+    private final int NRides;
+    private final int Bonus;
+    private final int TSteps;
     private final int [][] rides;
 
-    public Input(final int r, final int c, final int f, final int n, final int b, final int t, final int[][] rides) {
-        this.r = r;
-        this.c = c;
-        this.f = f;
-        this.n = n;
-        this.b = b;
-        this.t = t;
+    public Input(final int Rows, final int Cols, final int FVehicles, final int NRides, final int Bonus, final int TSteps, final int[][] rides) {
+        this.Rows = Rows;
+        this.Cols = Cols;
+        this.FVehicles = FVehicles;
+        this.NRides = NRides;
+        this.Bonus = Bonus;
+        this.TSteps = TSteps;
         this.rides = rides;
     }
 
-    public int getR() {
-        return r;
+    public int getRows() {
+        return Rows;
     }
 
-    public int getC() {
-        return c;
+    public int getCols() {
+        return Cols;
     }
 
-    public int getF() {
-        return f;
+    public int getFVehicles() {
+        return FVehicles;
     }
 
-    public int getN() {
-        return n;
+    public int getNRides() {
+        return NRides;
     }
 
-    public int getB() {
-        return b;
+    public int getBonus() {
+        return Bonus;
     }
 
-    public int getT() {
-        return t;
+    public int getTSteps() {
+        return TSteps;
     }
 
     public int[][] getRides() {
