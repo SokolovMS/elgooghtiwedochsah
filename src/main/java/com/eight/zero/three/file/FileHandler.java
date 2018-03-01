@@ -10,7 +10,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileHandler {
+
+    public static final String IN_FOLDER = "src/main/resources/";
+    public static final String OUT_FOLDER = "target/";
+
     public static Input read(final String fileName) {
+        final String path = IN_FOLDER + fileName;
+
         BufferedReader br = null;
         FileReader fr = null;
 
@@ -18,7 +24,7 @@ public class FileHandler {
         char [][] arr;
 
         try {
-            fr = new FileReader(fileName);
+            fr = new FileReader(path);
             br = new BufferedReader(fr);
 
             String sCurrentLine = br.readLine();
@@ -55,11 +61,13 @@ public class FileHandler {
     }
 
     public static void write(final String fileName, final Output output) {
+        final String path = OUT_FOLDER + fileName;
+
         BufferedWriter bw = null;
         FileWriter fw = null;
 
         try {
-            fw = new FileWriter(fileName, true);
+            fw = new FileWriter(path, false);
             bw = new BufferedWriter(fw);
 
             bw.append(output.toString());
