@@ -9,16 +9,7 @@ import com.eight.zero.three.output.Output;
  */
 public class Algorithm {
     public static Output run(final Input input) {
-        return new Output(
-                3,
-                new Slice(0, 2, 0, 1),
-                new Slice(0, 2, 2, 2),
-                new Slice(0, 2, 3, 4)
-        );
-    }
-
-    public static int getDistance(final int startRow, final int startCol, final int finRow, final int finCol) {
-        return Math.abs(startRow - finRow) + Math.abs(startCol - finCol);
+        return new Output(100);
     }
 
     public static int getDistance(final Coord a, final Coord b) {
