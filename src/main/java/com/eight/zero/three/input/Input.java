@@ -3,16 +3,20 @@ package com.eight.zero.three.input;
 public class Input {
     private final int r;
     private final int c;
-    private final int l;
-    private final int h;
-    private final char [][] arr;
+    private final int f;
+    private final int n;
+    private final int b;
+    private final int t;
+    private final int [][] rides;
 
-    public Input(final int r, final int c, final int l, final int h, final char[][] arr) {
+    public Input(final int r, final int c, final int f, final int n, final int b, final int t, final int[][] rides) {
         this.r = r;
         this.c = c;
-        this.l = l;
-        this.h = h;
-        this.arr = arr;
+        this.f = f;
+        this.n = n;
+        this.b = b;
+        this.t = t;
+        this.rides = rides;
     }
 
     public int getR() {
@@ -23,15 +27,23 @@ public class Input {
         return c;
     }
 
-    public int getL() {
-        return l;
+    public int getF() {
+        return f;
     }
 
-    public int getH() {
-        return h;
+    public int getN() {
+        return n;
     }
 
-    public char[][] getArr() {
-        return arr;
+    public int getB() {
+        return b;
+    }
+
+    public int getT() {
+        return t;
+    }
+
+    public int[][] getRides() {
+        return rides;
     }
 }
