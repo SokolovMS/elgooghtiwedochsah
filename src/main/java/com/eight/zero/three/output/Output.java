@@ -1,36 +1,42 @@
 package com.eight.zero.three.output;
 
-import com.eight.zero.three.Slice;
-
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Output {
-    private final int s;
-    private final List<Slice> slices;
+    private List<Integer> [] schedule;
 
-    public Output(final int s, final List<Slice> slices) {
-        this.s = s;
-        this.slices = slices;
+    public Output(int vehicleQnt) {
+        schedule = new List[vehicleQnt];
     }
 
-    public Output(final int s, final Slice... slices) {
-        this.s = s;
-        this.slices = Arrays.asList(slices);
-    }
+    public void addRides(int vehicle, int... rides) {
+        if (schedule[vehicle] == null) {
+            schedule[vehicle] = new ArrayList<>();
+        }
 
-    public int getS() {
-        return s;
-    }
-
-    public List<Slice> getSlices() {
-        return slices;
+        for (int ride : rides) {
+            schedule[vehicle].add(ride);
+        }
     }
 
     @Override
     public String toString() {
-        String slicesStr = slices.stream().map(Slice::toString).collect(Collectors.joining("\n"));
-        return s + "\n" + slicesStr;
+        StringBuilder sb = new StringBuilder();
+        for(List<Integer> rides : schedule) {
+
+            if(rides != null && rides.size() != 0) {
+                sb.append(rides.size());
+                for(int ride : rides) {
+                    sb.append(" ");
+                    sb.append(ride);
+                }
+
+                sb.append("\n");
+            }
+        }
+
+        return sb.toString();
     }
 }
