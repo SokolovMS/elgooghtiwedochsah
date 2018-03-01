@@ -50,11 +50,9 @@ public class Vehicle {
         int vehicleToRideDst = getDistance(prevFinish, ride.getSrc());
         int finishStep = ride.getFinishInterval().gettMax();
 
+        int distance = rideDistance + vehicleToRideDst;
 
-
-
-
-        return true;
+        return (busySteps + distance) <= finishStep;
     }
 
     @Override
