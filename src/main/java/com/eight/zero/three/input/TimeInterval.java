@@ -9,11 +9,11 @@ public class TimeInterval {
         this.tMax = tMax;
     }
 
-    public int gettMin() {
+    public int getMin() {
         return tMin;
     }
 
-    public int gettMax() {
+    public int getMax() {
         return tMax;
     }
 }

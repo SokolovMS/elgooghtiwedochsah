@@ -20,8 +20,8 @@ public class Utils {
 
         // Sort by start time
         Collections.sort(rides, (ride1, ride2) -> {
-            int ride1StartTime = ride1.getStartInterval().gettMin();
-            int ride2StartTime = ride2.getStartInterval().gettMin();
+            int ride1StartTime = ride1.getStartInterval().getMin();
+            int ride2StartTime = ride2.getStartInterval().getMin();
 
             return ride1StartTime - ride2StartTime;
         });

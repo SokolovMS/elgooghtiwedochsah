@@ -7,21 +7,32 @@ public class FinalRide {
     private final int id;
     private final Coord src;
     private final Coord dst;
-    private final int score;
+    private final int totalScore;
     private final int t0;
     private final int t1;
 
     private final boolean isBonus;
+    private final Ride ride;
 
-    public FinalRide(final int t0, final Ride ride) {
+    public FinalRide(final int t0, final Ride ride, int bonus) {
         this.id = ride.getId();
         this.src = ride.getSrc();
         this.dst = ride.getDst();
-        this.score = ride.getScore();
         this.t0 = t0;
         this.t1 = t0 + ride.getScore();
 
-        this.isBonus = (t0 == ride.getStartInterval().gettMin());
+        this.isBonus = (t0 == ride.getStartInterval().getMin());
+        this.totalScore = ride.getScore() + (isBonus ? bonus : 0);
+
+        this.ride = ride;
+    }
+
+    public int getTotalScore() {
+        return totalScore;
+    }
+
+    public Ride getRide() {
+        return ride;
     }
 
     public int getId() {
@@ -37,7 +48,7 @@ public class FinalRide {
     }
 
     public int getScore() {
-        return score;
+        return totalScore;
     }
 
     public int getT0() {
