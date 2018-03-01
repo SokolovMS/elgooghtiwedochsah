@@ -23,6 +23,9 @@ public class Algorithm {
             unassignedRides = reorderRides(unassignedRides);
 
             while (!freeVehicles.isEmpty() && !unassignedRides.isEmpty()) {
+                List<Vehicle> freeVehicleState = new ArrayList<>(freeVehicles);
+                LinkedList<Ride> failedToAssignRides = new LinkedList<>();
+
                 Vehicle assignedVehicle = null;
                 Ride topRide = unassignedRides.removeFirst();
 
@@ -30,11 +33,19 @@ public class Algorithm {
                     if (freeVehicle.canBeAssign(topRide)) {
                         freeVehicle.assignRide(topRide);
                         assignedVehicle = freeVehicle;
+                        break;
                     }
                 }
 
                 if (assignedVehicle != null) {
                     freeVehicles.remove(assignedVehicle);
+                } else {
+                    unassignedRides.addLast(topRide);
+                    failedToAssignRides.addFirst(topRide);
+                }
+
+                if (freeVehicles.equals(freeVehicleState) && failedToAssignRides.containsAll(unassignedRides)) {
+                    break;
                 }
             }
         }
