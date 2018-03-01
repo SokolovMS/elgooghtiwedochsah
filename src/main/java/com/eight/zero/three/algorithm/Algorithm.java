@@ -14,6 +14,8 @@ import java.util.List;
 public class Algorithm {
     public static Output run(final Input input) {
         List<Ride> unassignedRides = new ArrayList<>(input.getRides());
+        unassignedRides = Utils.sortRides(unassignedRides);
+
         List<Vehicle> vehicles = getVehicles(input.getFVehicles());
 
         for (int curStep = 0; curStep < input.getTSteps(); curStep++) {
