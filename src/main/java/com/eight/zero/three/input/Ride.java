@@ -16,7 +16,7 @@ public class Ride {
         this.dst = new Coord(x, y);
         this.score = Algorithm.getDistance(src, dst);
         this.startInterval = new TimeInterval(s, f - score);
-        this.finishInterval = new TimeInterval(f - score + 1, f);
+        this.finishInterval = new TimeInterval(s + score, f);
     }
 
     public Coord getSrc() {

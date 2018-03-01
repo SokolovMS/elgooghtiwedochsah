@@ -1,5 +1,7 @@
 package com.eight.zero.three.input;
 
+import java.util.List;
+
 public class Input {
     private final int Rows;
     private final int Cols;
@@ -7,9 +9,9 @@ public class Input {
     private final int NRides;
     private final int Bonus;
     private final int TSteps;
-    private final int [][] rides;
+    private final List<Ride> rides;
 
-    public Input(final int Rows, final int Cols, final int FVehicles, final int NRides, final int Bonus, final int TSteps, final int[][] rides) {
+    public Input(final int Rows, final int Cols, final int FVehicles, final int NRides, final int Bonus, final int TSteps, final List<Ride> rides) {
         this.Rows = Rows;
         this.Cols = Cols;
         this.FVehicles = FVehicles;
@@ -43,7 +45,7 @@ public class Input {
         return TSteps;
     }
 
-    public int[][] getRides() {
+    public List<Ride> getRides() {
         return rides;
     }
 }
