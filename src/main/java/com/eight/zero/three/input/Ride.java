@@ -2,6 +2,8 @@ package com.eight.zero.three.input;
 
 import com.eight.zero.three.algorithm.Utils;
 
+import java.util.Objects;
+
 public class Ride {
     private final int id;
     private final Coord src;
@@ -44,5 +46,18 @@ public class Ride {
 
     public TimeInterval getFinishInterval() {
         return finishInterval;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ride ride = (Ride) o;
+        return id == ride.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

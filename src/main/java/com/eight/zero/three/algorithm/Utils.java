@@ -4,6 +4,7 @@ import com.eight.zero.three.input.Coord;
 import com.eight.zero.three.input.Ride;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Utils {
@@ -11,7 +12,7 @@ public class Utils {
         return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());
     }
 
-    public static List<Ride> sortRides(List<Ride> rides) {
+    public static LinkedList<Ride> sortRides(List<Ride> rides) {
         // Sort by distance
         Collections.sort(rides, (ride1, ride2) -> {
             return ride1.getScore() - ride2.getScore();
@@ -25,6 +26,6 @@ public class Utils {
             return ride1StartTime - ride2StartTime;
         });
 
-        return rides;
+        return new LinkedList<>(rides);
     }
 }
