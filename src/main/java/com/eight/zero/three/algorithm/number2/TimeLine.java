@@ -1,6 +1,7 @@
 package com.eight.zero.three.algorithm.number2;
 
 import com.eight.zero.three.algorithm.Utils;
+import com.eight.zero.three.input.Input;
 import com.eight.zero.three.input.Ride;
 
 import java.util.LinkedList;
@@ -17,36 +18,40 @@ public class TimeLine {
         finalRides = new LinkedList<>();
     }
 
+    public TimeLine(Input input) {
+        this(input.getBonus(), input.getTSteps());
+    }
+
     public int pointsAfterConnectingNewRide(final int t0, final Ride ride) {
         FinalRide newFinalRide = new FinalRide(t0, ride);
         if (finalRides.isEmpty()) {
-            return isRideCorrect(newFinalRide);
+            return ridePoints(newFinalRide);
         }
 
         for (FinalRide current : finalRides) {
             // TODO: need improvements
             if (!canRidesBeConnected(current, newFinalRide)) {
-                return false;
+                return -1;
             }
         }
 
-        return isRideCorrect(newFinalRide);
+        return ridePoints(newFinalRide);
     }
 
-    public boolean canBeAdded(final int t0, final Ride ride) {
+    public void add(final int t0, final Ride ride) {
         FinalRide newFinalRide = new FinalRide(t0, ride);
         if (finalRides.isEmpty()) {
-            return isRideCorrect(newFinalRide);
+            finalRides.add(newFinalRide);
+            return;
         }
 
-        for (FinalRide current : finalRides) {
-            // TODO: need improvements
-            if (!canRidesBeConnected(current, newFinalRide)) {
-                return false;
-            }
+        // If can connect from left
+        int indexToPaste = 0;
+        while (indexToPaste < finalRides.size() && !canBeConnected(newFinalRide, finalRides.get(indexToPaste))) {
+            indexToPaste++;
         }
 
-        return isRideCorrect(newFinalRide);
+        finalRides.add(indexToPaste, newFinalRide);
     }
 
     private boolean canRidesBeConnected(FinalRide current, FinalRide newFinalRide) {
@@ -54,12 +59,17 @@ public class TimeLine {
     }
 
     private boolean canBeConnected(FinalRide left, FinalRide right) {
-        return left.getT1() + Utils.getDistance(left.getDst(), right.getSrc()) <
+        return left.getT1() + Utils.getDistance(left.getDst(), right.getSrc()) <= right.getT0();
     }
 
-    public boolean isRideCorrect(final FinalRide finalRide) {
+    private boolean isRideCorrect(final FinalRide finalRide) {
         return (finalRide.getT0() >= 0 && finalRide.getT0() <= TSteps &&
                 finalRide.getT0() <= finalRide.getT1() &&
                 finalRide.getT1() >= 0 && finalRide.getT1() <=TSteps);
+    }
+
+    private int ridePoints(final FinalRide ride) {
+        int bonus = ride.isBonus() ? Bonus : 0;
+        return isRideCorrect(ride) ? ride.getScore() + bonus : -1;
     }
 }

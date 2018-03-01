@@ -11,13 +11,17 @@ public class FinalRide {
     private final int t0;
     private final int t1;
 
+    private final boolean isBonus;
+
     public FinalRide(final int t0, final Ride ride) {
         this.id = ride.getId();
         this.src = ride.getSrc();
         this.dst = ride.getDst();
         this.score = ride.getScore();
         this.t0 = t0;
-        this.t1 = t0 + score;
+        this.t1 = t0 + ride.getScore();
+
+        this.isBonus = (t0 == ride.getStartInterval().gettMin());
     }
 
     public int getId() {
@@ -42,5 +46,9 @@ public class FinalRide {
 
     public int getT1() {
         return t1;
+    }
+
+    public boolean isBonus() {
+        return isBonus;
     }
 }
