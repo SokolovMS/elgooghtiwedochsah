@@ -4,7 +4,7 @@ import com.eight.zero.three.algorithm.Utils;
 
 import java.util.Objects;
 
-public class Ride {
+public class PossibleRide {
     private final int id;
     private final Coord src;
     private final Coord dst;
@@ -12,16 +12,25 @@ public class Ride {
     private final TimeInterval startInterval;
     private final TimeInterval finishInterval;
 
-    public Ride(int id,
-                final int a, final int b,
-                final int x, final int y,
-                final int s, final int f) {
+    public PossibleRide(int id,
+                        final int a, final int b,
+                        final int x, final int y,
+                        final int s, final int f) {
         this.id = id;
         this.src = new Coord(a, b);
         this.dst = new Coord(x, y);
         this.score = Utils.getDistance(src, dst);
         this.startInterval = new TimeInterval(s, f - score);
         this.finishInterval = new TimeInterval(s + score, f);
+    }
+
+    public PossibleRide(final PossibleRide possibleRide) {
+        this.id = possibleRide.getId();
+        this.src = possibleRide.getSrc();
+        this.dst = possibleRide.getDst();
+        this.score = possibleRide.getScore();
+        this.startInterval = possibleRide.getStartInterval();
+        this.finishInterval = possibleRide.getFinishInterval();
     }
 
     public int getId() {
@@ -51,13 +60,15 @@ public class Ride {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Ride ride = (Ride) o;
-        return id == ride.id;
+        if (o == null || !(o instanceof PossibleRide)) return false;
+
+        PossibleRide that = (PossibleRide) o;
+
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return id;
     }
 }

@@ -1,9 +1,8 @@
 package com.eight.zero.three.algorithm.number2;
 
 import com.eight.zero.three.algorithm.Utils;
-import com.eight.zero.three.input.Coord;
 import com.eight.zero.three.input.Input;
-import com.eight.zero.three.input.Ride;
+import com.eight.zero.three.input.PossibleRide;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -20,94 +19,78 @@ public class TimeLine {
     public TimeLine(final int Bonus, final int TSteps) {
         this.Bonus = Bonus;
         this.TSteps = TSteps;
+
         finalRides = new LinkedList<>();
+        finalRides.add(new StartRide());
     }
 
     public TimeLine(Input input) {
         this(input.getBonus(), input.getTSteps());
     }
 
-    public FinalRide pointsAfterConnectingRide(final Ride ride) {
-        if (finalRides.isEmpty()) {
-            int ind = getIndexIfSingle(ride);
-            if (ind >= 0) {
-                return new FinalRide(ind, ride, Bonus);
-            } else {
-                return null;
-            }
-        }
-
-        // If can connect from left
-        for (int i = 0; i < finalRides.size() - 1; i++) {
+    public PointsAfterInsert getPointsAfterInsert(final PossibleRide ride) {
+        int i = 0;
+        while (i < finalRides.size() - 1) {
             FinalRide left = finalRides.get(i);
-            FinalRide right = finalRides.get(i+1);
+            FinalRide right = finalRides.get(i + 1);
 
-            int indexIfBetween = getIndexIfBetween(left, ride, right);
-            if (indexIfBetween >= 0) {
-                return new FinalRide(indexIfBetween, ride, Bonus);
+            PointsAfterInsert result = getPointsAfterInsertBetween(left, ride, right);
+            if (result.canInsert()) {
+                return result;
             }
+
+            i++;
         }
 
-        int firstInd = getIndexIfFirst(ride);
-        if (firstInd >= 0) {
-            return new FinalRide(firstInd, ride, Bonus);
+        PointsAfterInsert result = getPointsAfterInsertToTheEnd(finalRides.get(i), ride);
+        return result;
+    }
+
+    private PointsAfterInsert getPointsAfterInsertBetween(FinalRide left, PossibleRide ride, FinalRide right) {
+        int tl1 = left.getT1() + Utils.getDistance(left.getDst(), ride.getSrc());
+        int tr0 = right.getT0() - Utils.getDistance(ride.getDst(), right.getSrc());
+
+        // TODO. Now will take min t0 for possible ride.
+        if (tl1 > ride.getStartInterval().getMax()) {
+            return new PointsAfterInsert(ride, false, -1, -1);
         }
+        int t0 = Math.max(tl1, ride.getStartInterval().getMin());
 
-        int lastInd = getIndexIfLast(ride);
-        if (lastInd >= 0) {
-            return new FinalRide(lastInd, ride, Bonus);
+        if (tr0 < ride.getFinishInterval().getMin()) {
+            return new PointsAfterInsert(ride, false, -1, -1);
         }
+        int t1 = ride.getFinishInterval().getMin() + t0 - ride.getStartInterval().getMin();
 
-        return null;
-    }
-
-    private int getIndexIfSingle(Ride ride) {
-        int finalX = ride.getDst().getX();
-        int finalY = ride.getDst().getY();
-        return getIndexIfBetween(new FinalRide(0, new Ride(-1, 0, 0, 0, 0, 0, 0), 0),
-                ride,
-                new FinalRide(TSteps, new Ride(-1, finalX, finalY, finalX, finalY, TSteps, TSteps), 0));
-    }
-
-    private int getIndexIfLast(Ride ride) {
-        int finalX = ride.getDst().getX();
-        int finalY = ride.getDst().getY();
-        return getIndexIfBetween(finalRides.get(finalRides.size() - 1), ride, new FinalRide(TSteps, new Ride(-1, finalX, finalY, finalX, finalY, TSteps, TSteps), 0));
-    }
-
-    private int getIndexIfFirst(Ride ride) {
-        return getIndexIfBetween(new FinalRide(0, new Ride(-1, 0, 0, 0, 0, 0, 0), 0), ride, finalRides.get(0));
-    }
-
-    private int getIndexIfBetween(FinalRide left, Ride ride, FinalRide right) {
-        int start = left.getT1() + Utils.getDistance(left.getDst(), ride.getSrc());
-        int finish = right.getT0() - Utils.getDistance(ride.getDst(), right.getSrc());
-
-        if ((ride.getStartInterval().getMax() >= start) && //(ride.getStartInterval().getMin() <= start) &&
-//                ((ride.getFinishInterval().getMax() >= finish) &&
-                        (ride.getFinishInterval().getMin() <= finish)) {
-            return Math.max(start, ride.getStartInterval().getMin());
+        if ((t0 <= ride.getStartInterval().getMax()) && (t1 <= tr0)) {
+            return new PointsAfterInsert(ride, true, t0, Bonus);
         } else {
-            return -1;
+            return new PointsAfterInsert(ride, false, -1, -1);
         }
     }
 
-    public void add(final FinalRide finalRide) {
-        if (finalRides.isEmpty()) {
-            finalRides.add(finalRide);
-            return;
-        }
+    private PointsAfterInsert getPointsAfterInsertToTheEnd(FinalRide left, PossibleRide ride) {
+        int tl1 = left.getT1() + Utils.getDistance(left.getDst(), ride.getSrc());
 
-        // If can connect from left
-        int indexToPaste = 0;
-        while (indexToPaste < finalRides.size() && !canBeConnected(finalRide, finalRides.get(indexToPaste))) {
-            indexToPaste++;
+        if (tl1 > ride.getStartInterval().getMax()) {
+            return new PointsAfterInsert(ride, false, -1, -1);
         }
+        int t0 = Math.max(tl1, ride.getStartInterval().getMin());
 
-        finalRides.add(indexToPaste, finalRide);
+        int t1 = ride.getFinishInterval().getMin() + t0 - ride.getStartInterval().getMin();
+
+        if ((t0 <= ride.getStartInterval().getMax()) && (t1 <= TSteps)) {
+            return new PointsAfterInsert(ride, true, t0, Bonus);
+        } else {
+            return new PointsAfterInsert(ride, false, -1, -1);
+        }
     }
 
-    private boolean canBeConnected(FinalRide left, FinalRide right) {
-        return left.getT1() + Utils.getDistance(left.getDst(), right.getSrc()) <= right.getT0();
+    public void add(FinalRide bestFinalRide) {
+        int i = 0;
+        while ((i < finalRides.size()) && (bestFinalRide.getT1() >= finalRides.get(i).getT1())) {
+            i++;
+        }
+
+        finalRides.add(i, bestFinalRide);
     }
 }

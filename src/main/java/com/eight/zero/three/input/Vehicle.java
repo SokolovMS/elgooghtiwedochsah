@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class Vehicle {
     private final Integer number;
-    private final List<Ride> rides;
+    private final List<PossibleRide> rides;
     private Coord prevFinish = new Coord(0,0);
     private int busySteps = 0;
 
@@ -17,7 +17,7 @@ public class Vehicle {
         this.rides = new ArrayList<>();
     }
 
-    public void assignRide(final Ride ride) {
+    public void assignRide(final PossibleRide ride) {
         rides.add(ride);
         busySteps += getDistance(prevFinish, ride.getSrc());
         busySteps += getDistance(ride.getSrc(), ride.getDst());
@@ -29,7 +29,7 @@ public class Vehicle {
         return number;
     }
 
-    public List<Ride> getRides() {
+    public List<PossibleRide> getRides() {
         return rides;
     }
 
@@ -45,7 +45,7 @@ public class Vehicle {
         return busySteps > curStep;
     }
 
-    public boolean canBeAssign(Ride ride) {
+    public boolean canBeAssign(PossibleRide ride) {
         int rideDistance = getDistance(ride.getSrc(), ride.getDst());
         int vehicleToRideDst = getDistance(prevFinish, ride.getSrc());
         int finishStep = ride.getFinishInterval().getMax();

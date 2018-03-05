@@ -1,7 +1,7 @@
 package com.eight.zero.three.algorithm;
 
 import com.eight.zero.three.input.Coord;
-import com.eight.zero.three.input.Ride;
+import com.eight.zero.three.input.PossibleRide;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -12,7 +12,7 @@ public class Utils {
         return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());
     }
 
-    public static LinkedList<Ride> sortRides(List<Ride> rides) {
+    public static LinkedList<PossibleRide> sortRides(List<PossibleRide> rides) {
         // Sort by distance
         Collections.sort(rides, (ride1, ride2) -> {
             return ride1.getScore() - ride2.getScore();

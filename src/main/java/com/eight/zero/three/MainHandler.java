@@ -1,7 +1,6 @@
 package com.eight.zero.three;
 
-import com.eight.zero.three.algorithm.Algorithm;
-import com.eight.zero.three.algorithm.GreedyBreedy;
+import com.eight.zero.three.algorithm.number2.GreedyBreedy;
 import com.eight.zero.three.file.FileHandler;
 import com.eight.zero.three.input.Input;
 import com.eight.zero.three.output.Output;

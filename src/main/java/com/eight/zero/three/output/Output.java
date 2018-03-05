@@ -1,6 +1,6 @@
 package com.eight.zero.three.output;
 
-import com.eight.zero.three.input.Ride;
+import com.eight.zero.three.input.PossibleRide;
 import com.eight.zero.three.input.Vehicle;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class Output {
                 schedule[i] = new ArrayList<>();
             }
 
-            for (Ride ride : vehicles.get(i).getRides()) {
+            for (PossibleRide ride : vehicles.get(i).getRides()) {
                 schedule[i].add(ride.getId());
             }
         }

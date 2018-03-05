@@ -1,7 +1,7 @@
 package com.eight.zero.three.file;
 
 import com.eight.zero.three.input.Input;
-import com.eight.zero.three.input.Ride;
+import com.eight.zero.three.input.PossibleRide;
 import com.eight.zero.three.output.Output;
 
 import java.io.BufferedReader;
@@ -24,7 +24,7 @@ public class FileHandler {
         FileReader fileReader = null;
 
         int r, c, f, n, b, t;
-        List<Ride> rides = new ArrayList<>();
+        List<PossibleRide> rides = new ArrayList<>();
 
         try {
             fileReader = new FileReader(path);
@@ -43,7 +43,7 @@ public class FileHandler {
                 sCurrentLine = bufferedReader.readLine();
                 String[] rideSplit = sCurrentLine.split(" ");
 
-                Ride currentRide = new Ride(
+                PossibleRide currentRide = new PossibleRide(
                         i, Integer.parseInt(rideSplit[0]),
                         Integer.parseInt(rideSplit[1]),
                         Integer.parseInt(rideSplit[2]),

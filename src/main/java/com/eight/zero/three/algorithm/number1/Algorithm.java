@@ -1,7 +1,8 @@
-package com.eight.zero.three.algorithm;
+package com.eight.zero.three.algorithm.number1;
 
+import com.eight.zero.three.algorithm.Utils;
 import com.eight.zero.three.input.Input;
-import com.eight.zero.three.input.Ride;
+import com.eight.zero.three.input.PossibleRide;
 import com.eight.zero.three.input.Vehicle;
 import com.eight.zero.three.output.Output;
 
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public class Algorithm {
     public static Output run(final Input input) {
-        LinkedList<Ride> unassignedRides = new LinkedList<>(input.getRides());
+        LinkedList<PossibleRide> unassignedRides = new LinkedList<>(input.getRides());
         unassignedRides = Utils.sortRides(unassignedRides);
         List<Vehicle> vehicles = generateVehicles(input.getFVehicles());
 
@@ -24,7 +25,7 @@ public class Algorithm {
 
             while (!freeVehicles.isEmpty() && !unassignedRides.isEmpty()) {
                 Vehicle assignedVehicle = null;
-                Ride topRide = unassignedRides.removeFirst();
+                PossibleRide topRide = unassignedRides.removeFirst();
 
                 for (Vehicle freeVehicle : freeVehicles) {
                     if (freeVehicle.canBeAssign(topRide)) {
@@ -51,7 +52,7 @@ public class Algorithm {
         return vehicles;
     }
 
-    private static LinkedList<Ride> reorderRides(LinkedList<Ride> unassignedRides) {
+    private static LinkedList<PossibleRide> reorderRides(LinkedList<PossibleRide> unassignedRides) {
         return Utils.sortRides(unassignedRides);
     }
 

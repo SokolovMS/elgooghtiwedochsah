@@ -9,9 +9,9 @@ public class Input {
     private final int NRides;
     private final int Bonus;
     private final int TSteps;
-    private final List<Ride> rides;
+    private final List<PossibleRide> rides;
 
-    public Input(final int Rows, final int Cols, final int FVehicles, final int NRides, final int Bonus, final int TSteps, final List<Ride> rides) {
+    public Input(final int Rows, final int Cols, final int FVehicles, final int NRides, final int Bonus, final int TSteps, final List<PossibleRide> rides) {
         this.Rows = Rows;
         this.Cols = Cols;
         this.FVehicles = FVehicles;
@@ -45,7 +45,7 @@ public class Input {
         return TSteps;
     }
 
-    public List<Ride> getRides() {
+    public List<PossibleRide> getRides() {
         return rides;
     }
 }
