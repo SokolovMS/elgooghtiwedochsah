@@ -3,7 +3,6 @@ package com.eight.zero.three.algorithm.number1;
 import com.eight.zero.three.algorithm.Utils;
 import com.eight.zero.three.input.Input;
 import com.eight.zero.three.input.PossibleRide;
-import com.eight.zero.three.input.Vehicle;
 import com.eight.zero.three.output.Output;
 
 import java.util.ArrayList;
@@ -13,13 +12,13 @@ import java.util.List;
 /**
  * I am just testing git plugin in Idea.
  */
-public class Algorithm {
+public class Algorithm1 {
     public static Output run(final Input input) {
         LinkedList<PossibleRide> unassignedRides = new LinkedList<>(input.getRides());
         unassignedRides = Utils.sortRides(unassignedRides);
-        List<Vehicle> vehicles = generateVehicles(input.getFVehicles());
+        List<Vehicle> vehicles = generateVehicles(input.getnVehicles());
 
-        for (int curStep = 0; curStep < input.getTSteps(); curStep++) {
+        for (int curStep = 0; curStep < input.gettSteps(); curStep++) {
             List<Vehicle> freeVehicles = getFreeVehicles(vehicles, curStep);
             LinkedList<PossibleRide> candidateRides = new LinkedList<>(unassignedRides);
 
@@ -42,7 +41,7 @@ public class Algorithm {
             }
         }
 
-        return new Output(vehicles);
+        return Output.fromVehicles(vehicles);
     }
 
     private static List<Vehicle> generateVehicles(int fVehicles) {

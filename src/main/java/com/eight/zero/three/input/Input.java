@@ -3,46 +3,49 @@ package com.eight.zero.three.input;
 import java.util.List;
 
 public class Input {
-    private final int Rows;
-    private final int Cols;
-    private final int FVehicles;
-    private final int NRides;
-    private final int Bonus;
-    private final int TSteps;
+    private final int rows;
+    private final int cols;
+    private final int nVehicles;
+    private final int nRides;
+    private final int bonus;
+    private final int tSteps;
     private final List<PossibleRide> rides;
 
-    public Input(final int Rows, final int Cols, final int FVehicles, final int NRides, final int Bonus, final int TSteps, final List<PossibleRide> rides) {
-        this.Rows = Rows;
-        this.Cols = Cols;
-        this.FVehicles = FVehicles;
-        this.NRides = NRides;
-        this.Bonus = Bonus;
-        this.TSteps = TSteps;
+    public Input(final int rows, final int cols,
+                 final int nVehicles, final int nRides,
+                 final int bonus, final int tSteps,
+                 final List<PossibleRide> rides) {
+        this.rows = rows;
+        this.cols = cols;
+        this.nVehicles = nVehicles;
+        this.nRides = nRides;
+        this.bonus = bonus;
+        this.tSteps = tSteps;
         this.rides = rides;
     }
 
     public int getRows() {
-        return Rows;
+        return rows;
     }
 
     public int getCols() {
-        return Cols;
+        return cols;
     }
 
-    public int getFVehicles() {
-        return FVehicles;
+    public int getnVehicles() {
+        return nVehicles;
     }
 
-    public int getNRides() {
-        return NRides;
+    public int getnRides() {
+        return nRides;
     }
 
     public int getBonus() {
-        return Bonus;
+        return bonus;
     }
 
-    public int getTSteps() {
-        return TSteps;
+    public int gettSteps() {
+        return tSteps;
     }
 
     public List<PossibleRide> getRides() {

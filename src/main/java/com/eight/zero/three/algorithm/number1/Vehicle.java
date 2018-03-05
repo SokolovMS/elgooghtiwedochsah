@@ -1,4 +1,7 @@
-package com.eight.zero.three.input;
+package com.eight.zero.three.algorithm.number1;
+
+import com.eight.zero.three.input.Coord;
+import com.eight.zero.three.input.PossibleRide;
 
 import static com.eight.zero.three.algorithm.Utils.getDistance;
 

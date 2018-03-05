@@ -16,8 +16,4 @@ public class TimeInterval {
     public int getMax() {
         return tMax;
     }
-
-    public boolean isIn(final int t) {
-        return (t >= tMin) && (t <= tMax);
-    }
 }

@@ -2,17 +2,20 @@ package com.eight.zero.three.algorithm.number2;
 
 import com.eight.zero.three.input.Input;
 import com.eight.zero.three.input.PossibleRide;
-import com.eight.zero.three.input.Vehicle;
 import com.eight.zero.three.output.Output;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class GreedyBreedy {
+/**
+ * Each vehicle has its own timeline (vehicle ~ timeline).
+ * Lets iterate over all timelines and add most profitable ride to each.
+ */
+public class Algorithm2 {
     public static Output run(final Input input) {
         List<TimeLine> timeLines = new LinkedList<>();
-        for (int i = 0; i < input.getFVehicles(); i++) {
+        for (int i = 0; i < input.getnVehicles(); i++) {
             timeLines.add(new TimeLine(input));
         }
 
@@ -46,18 +49,6 @@ public class GreedyBreedy {
             }
         }
 
-        List<Vehicle> vehicles = new ArrayList<>();
-        for (int i = 0; i < timeLines.size(); i++) {
-            Vehicle vehicle = new Vehicle(i);
-            for (FinalRide ride : timeLines.get(i).getFinalRides()) {
-                if (ride.getId() >= 0) {
-                    vehicle.assignRide(ride);
-                }
-            }
-
-            vehicles.add(vehicle);
-
-        }
-        return new Output(vehicles);
+        return Output.fromTimeLines(timeLines);
     }
 }
