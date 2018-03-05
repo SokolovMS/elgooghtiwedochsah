@@ -21,21 +21,23 @@ public class Algorithm {
 
         for (int curStep = 0; curStep < input.getTSteps(); curStep++) {
             List<Vehicle> freeVehicles = getFreeVehicles(vehicles, curStep);
-            unassignedRides = reorderRides(unassignedRides);
+            LinkedList<PossibleRide> candidateRides = new LinkedList<>(unassignedRides);
 
-            while (!freeVehicles.isEmpty() && !unassignedRides.isEmpty()) {
+            while (!freeVehicles.isEmpty() && !candidateRides.isEmpty()) {
                 Vehicle assignedVehicle = null;
-                PossibleRide topRide = unassignedRides.removeFirst();
+                PossibleRide topRide = candidateRides.removeFirst();
 
                 for (Vehicle freeVehicle : freeVehicles) {
                     if (freeVehicle.canBeAssign(topRide)) {
                         freeVehicle.assignRide(topRide);
                         assignedVehicle = freeVehicle;
+                        break;
                     }
                 }
 
                 if (assignedVehicle != null) {
                     freeVehicles.remove(assignedVehicle);
+                    unassignedRides.remove(topRide);
                 }
             }
         }
@@ -50,10 +52,6 @@ public class Algorithm {
         }
 
         return vehicles;
-    }
-
-    private static LinkedList<PossibleRide> reorderRides(LinkedList<PossibleRide> unassignedRides) {
-        return Utils.sortRides(unassignedRides);
     }
 
     private static List<Vehicle> getFreeVehicles(List<Vehicle> vehicles, int curStep) {
