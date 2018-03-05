@@ -25,7 +25,7 @@ public class TimeLine {
     }
 
     public TimeLine(Input input) {
-        this(input.getBonus(), input.getTSteps());
+        this(input.getBonus(), input.gettSteps());
     }
 
     public PointsAfterInsert getPointsAfterInsert(final PossibleRide ride) {
